@@ -1,3 +1,4 @@
+import { GameConfig } from './game-config';
 export class Square {
     x: number;
     y: number;
@@ -5,15 +6,19 @@ export class Square {
     ySize: number;
     ogColour;
     colour;
+    canvas: HTMLCanvasElement;
+    ctx: CanvasRenderingContext2D;
 
-    constructor(x, y, xSize, ySize, colour) {
+    constructor(x, y, xSize, ySize, colour, canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
         this.x = x;
         this.y = y;
         this.xSize = xSize;
         this.ySize = ySize;
-        // this.ogColour = Config.DRAW_COLOURS[Config.COLOUR_NAMES[colour]];
-        // this.colour = Config.DRAW_COLOURS[Config.COLOUR_NAMES[colour]];
-        // this.highlighted = false;
+        this.canvas = canvas;
+        this.ctx = ctx;
+        this.ogColour = GameConfig.DRAW_COLOURS[GameConfig.COLOUR_NAMES[colour]];
+        this.colour = GameConfig.DRAW_COLOURS[GameConfig.COLOUR_NAMES[colour]];
+        //this.highlighted = false;
     }
 
     // setUnhighlighted() {
@@ -31,7 +36,7 @@ export class Square {
     // }
 
     draw() {
-        Context.ctx.fillStyle = this.colour;
-        Context.ctx.fillRect(this.x, this.y, this.xSize, this.ySize);
+        this.ctx.fillStyle = this.colour;
+        this.ctx.fillRect(this.x, this.y, this.xSize, this.ySize);
     }
 }

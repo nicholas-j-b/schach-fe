@@ -1,20 +1,24 @@
+import { GameConfig } from './game-config';
 export class Position {
-    static getAbsolutePosition(x, y) {
-        return [
-            Position.getAbsoluteX(x),
-            Position.getAbsoluteY(y)
-        ]
+    x: number;
+    y: number;
+
+    public static getAbsolutePosition(x: number, y: number) {
+        return {
+            x: Position.getAbsoluteX(x),
+            y: Position.getAbsoluteY(y)
+        };
     }
 
-    static getAbsoluteX(boardPositionX) {
-        return Position.calculateAbsolute(Config.BOARD.SQUARE_WIDTH, boardPositionX, Config.PIECE.X_SIZE);
-        
-    }
-    static getAbsoluteY(boardPositionY) {
-        return Position.calculateAbsolute(Config.BOARD.SQUARE_HEIGHT, boardPositionY, Config.PIECE.Y_SIZE);
+    private static getAbsoluteX(boardPositionX) {
+        return Position.calculateAbsolute(GameConfig.BOARD.SQUARE_WIDTH, boardPositionX, GameConfig.PIECE.X_SIZE);
     }
 
-    static calculateAbsolute(stepSize, position, pieceSize) {
+    private static getAbsoluteY(boardPositionY) {
+        return Position.calculateAbsolute(GameConfig.BOARD.SQUARE_HEIGHT, boardPositionY, GameConfig.PIECE.Y_SIZE);
+    }
+
+    private static calculateAbsolute(stepSize, position, pieceSize) {
         const startEdge = 0;
         const firstPoint = stepSize / 2;
         return position * stepSize + firstPoint + startEdge - pieceSize;

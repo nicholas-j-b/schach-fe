@@ -1,3 +1,4 @@
+import { Game } from './model/game/game';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -18,7 +19,9 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    Game
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
