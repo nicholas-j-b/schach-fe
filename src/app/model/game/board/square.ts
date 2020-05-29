@@ -1,4 +1,4 @@
-import { GameConfig } from './game-config';
+import { GameConfig } from '../game-config';
 export class Square {
     x: number;
     y: number;

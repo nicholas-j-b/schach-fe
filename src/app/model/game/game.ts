@@ -1,9 +1,8 @@
 import { GameTimer } from './game-timer';
 import { Piece } from './piece';
-import { BoardFactory } from './board-factory';
-import { Board } from './board';
+import { BoardFactory } from './board/board-factory';
+import { Board } from './board/board';
 import { PieceMessage } from './../message/piece-message';
-import { Drawer } from './drawer';
 import { InitialMessage } from './../message/initial-message';
 import { ConnectionService } from './../../service/api/connection.service';
 import { MessageSocketService } from './../../service/socket/message-socket.service';
@@ -25,7 +24,7 @@ export class Game {
         private readonly connectionService: ConnectionService
     ) {
         this.openConnection();
-        this.board = BoardFactory.wire(this.canvas, this.ctx, this.messageService.$pieceMessage);
+        this.board = BoardFactory.wire(this.canvas, this.ctx, this.messageService);
         this.board.draw();
         this.timer.start(this.board, this.update);
     }
@@ -42,11 +41,5 @@ export class Game {
             }
         });
     }
-
-    // private something() {
-    //     this.messageService.$pieceMessage.subscribe((pieceMessage: Piece[]) => {
-    //         // draw board
-    //     });
-    // }
 
 }

@@ -1,16 +1,15 @@
+import { MessageSocketService } from './../../../service/socket/message-socket.service';
 import { Square } from './square';
-import { GameConfig } from './game-config';
+import { GameConfig } from '../game-config';
 import { Board } from './board';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Piece } from './piece';
+import { Piece } from '../piece';
+import { ClickStore } from '../service/click-store';
 export class BoardFactory {
 
-    public static wire(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D, $pieces: Observable<Piece[]>) {
-        const board = new Board(canvas, ctx);
+    public static wire(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D, messageService: MessageSocketService) {
+        const board = new Board(canvas, ctx, messageService); 
         board.boardSquares = BoardFactory.initialiseSquares(canvas, ctx);
-        $pieces.subscribe((pieces: Piece[]) => {
-            board.pieces = pieces;
-        });
         return board;
     }
 

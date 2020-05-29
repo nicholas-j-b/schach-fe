@@ -1,3 +1,5 @@
+import { LegalMoveMessage } from './../../model/message/legal-move-message';
+import { Move } from './../../model/game/move';
 import { Piece } from '../../model/game/piece';
 import { PieceMessage } from '../../model/message/piece-message';
 import { Colour } from './../../model/colour.enum';
@@ -17,6 +19,9 @@ export class MessageSocketService {
 
   private readonly _pieceMessage = new BehaviorSubject<Piece[]>([]);
   public $pieceMessage = this._pieceMessage.asObservable();
+
+  private readonly _legalMovesMessage = new BehaviorSubject<Move[]>([]);
+  public $legalMovesMessage = this._legalMovesMessage.asObservable();
 
   initialise(initialMessage: InitialMessage) {
     this.setVals(initialMessage);
@@ -40,12 +45,13 @@ export class MessageSocketService {
         console.log(pieceMessage);
       });
       that.ws.subscribe(`/down/${that.connectionId}/legalMoves`, (msg) => {
-        //const pieceMessage = JSON.parse(msg.body) as PieceMessage;
-        //this._pieceMessage.next(pieceMessage);
+        const legalMoveMessage = JSON.parse(msg.body) as LegalMoveMessage;
+        this._legalMovesMessage.next(legalMoveMessage.moves);
         console.log('------legalMoves-----');
         console.log(msg);
+        console.log(legalMoveMessage);
       });
-      that.sendMove('this is the init string');
+      that.sendInitMessage();
     }, (error) => {
       console.log(error);
     });
@@ -57,7 +63,11 @@ export class MessageSocketService {
     }
   }
 
-  public sendMove(move) {
+  public sendInitMessage() {
+    this.sendMessage('init', 'init');
+  }
+
+  public sendMove(move: Move) {
     const msg = JSON.stringify(move);
     this.sendMessage(msg, 'movement');
   }
