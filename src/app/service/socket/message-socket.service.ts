@@ -1,3 +1,4 @@
+import { MoveCollection } from './../../model/game/move-collection';
 import { LegalMoveMessage } from './../../model/message/legal-move-message';
 import { Move } from './../../model/game/move';
 import { Piece } from '../../model/game/piece';
@@ -20,7 +21,7 @@ export class MessageSocketService {
   private readonly _pieceMessage = new BehaviorSubject<Piece[]>([]);
   public $pieceMessage = this._pieceMessage.asObservable();
 
-  private readonly _legalMovesMessage = new BehaviorSubject<Move[]>([]);
+  private readonly _legalMovesMessage = new BehaviorSubject<MoveCollection[]>([]);
   public $legalMovesMessage = this._legalMovesMessage.asObservable();
 
   initialise(initialMessage: InitialMessage) {

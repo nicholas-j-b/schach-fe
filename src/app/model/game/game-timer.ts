@@ -3,6 +3,6 @@ export class GameTimer {
 
     public start(arg, fun) {
         const that = this;
-        setInterval(() => { that.ticks += 1; fun(arg); }, 500);
+        setInterval(() => { that.ticks += 1; fun(arg); }, 1000 / 20);
     }
 }

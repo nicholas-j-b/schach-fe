@@ -1,32 +1,34 @@
+import { MoveCollection } from './../move-collection';
+import { FunReturn } from './../../fun-return.enum';
 import { ClickState } from './../click-state';
 import { Move } from './../move';
 import { BoardPosition } from '../position/board-position';
 
 export class ClickStore {
     private clickState = ClickState.DEFAULT;
-    private legalMoves: Move[];
+    private legalMoves: MoveCollection[];
     private selectedPiece: BoardPosition;
 
-    public onClick(boardPosition: BoardPosition): string {
+    public onClick(boardPosition: BoardPosition): FunReturn {
         switch (this.clickState) {
             case ClickState.DEFAULT: {
                 if (this.legalPieceSelection(boardPosition)) {
                     this.selectedPiece = boardPosition;
                     this.clickState = ClickState.SELECTED_TO_MOVE;
-                    return 'selectPieceForMoving';
+                    return FunReturn.SELECT_PIECE_FOR_MOVING;
                 }
-                return 'doNothing';
+                return FunReturn.DO_NOTHING;
             }
             case ClickState.SELECTED_TO_MOVE: {
                 if (this.legalPieceMove(boardPosition)) {
                     this.clickState = ClickState.DEFAULT;
-                    return 'move';
+                    return FunReturn.MOVE;
                 }
                 this.clickState = ClickState.DEFAULT;
-                return 'deselectPiece';
+                return FunReturn.DESELECT_PIECE;
             }
             default: {
-                return 'doNothing';
+                return FunReturn.DO_NOTHING;
             }
         }
     }
@@ -39,7 +41,9 @@ export class ClickStore {
 
     private legalPieceMove(boardPosition: BoardPosition) {
         return this.legalMoves.some((move) => {
-            return this.selectedPiece.equals(move.from) && boardPosition.equals(move.to);
+            return this.selectedPiece.equals(move.from) && move.to.some((pos) => {
+                return boardPosition.equals(pos);
+            });
         });
     }
 
@@ -47,7 +51,7 @@ export class ClickStore {
         return this.selectedPiece;
     }
 
-    public setLegalMoves(moves: Move[]) {
+    public setLegalMoves(moves: MoveCollection[]) {
         this.legalMoves = moves;
     }
 }

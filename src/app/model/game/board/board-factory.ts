@@ -1,3 +1,4 @@
+import { BoardColour } from './../../../view/board/board-colour.enum';
 import { MessageSocketService } from './../../../service/socket/message-socket.service';
 import { Square } from './square';
 import { GameConfig } from '../game-config';
@@ -20,9 +21,9 @@ export class BoardFactory {
             for (let j = 0; j < 8; j++) {
                 let colour;
                 if ((i + j) % 2 === 0) {
-                    colour = GameConfig.COLOURS.WHITE;
+                    colour = BoardColour.whiteSquare;
                 } else {
-                    colour = GameConfig.COLOURS.BLACK;
+                    colour = BoardColour.blackSquare;
                 }
                 const square = new Square(
                     GameConfig.BOARD.SQUARE_WIDTH * j,

@@ -1,3 +1,4 @@
+import { HighlightType } from './../../../view/board/highlight-type.enum';
 import { GameConfig } from '../game-config';
 export class Square {
     x: number;
@@ -16,15 +17,19 @@ export class Square {
         this.ySize = ySize;
         this.canvas = canvas;
         this.ctx = ctx;
-        this.ogColour = GameConfig.DRAW_COLOURS[GameConfig.COLOUR_NAMES[colour]];
-        this.colour = GameConfig.DRAW_COLOURS[GameConfig.COLOUR_NAMES[colour]];
+        this.ogColour = GameConfig.DRAW_COLOURS[colour];
+        this.colour = GameConfig.DRAW_COLOURS[colour];
         //this.highlighted = false;
     }
 
-    // setUnhighlighted() {
-    //     this.highlighted = false;
-    //     this.colour = this.ogColour;
-    // }
+    public setHighlight(highlightType: HighlightType) {
+        this.colour = GameConfig.DRAW_COLOURS[highlightType];
+    }
+
+    setUnhighlighted() {
+        //this.highlighted = false;
+        this.colour = this.ogColour;
+    }
 
     // setHighlighted() {
     //     if (this.highlighted) {

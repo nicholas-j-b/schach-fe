@@ -22,8 +22,14 @@ export class ConnectionService {
     });
   }
 
-  public requestNewConnection() {
-    this.http.get('http://localhost:9901/api/board/getConnection').subscribe((res: InitialMessage) => {
+  public createGame() {
+    this.http.get('http://localhost:9901/api/game/create').subscribe((res: InitialMessage) => {
+      this._connectionSocketInitialMessage.next(res);
+    });
+  }
+
+  public joinGame() {
+    this.http.get('http://localhost:9901/api/game/join').subscribe((res: InitialMessage) => {
       this._connectionSocketInitialMessage.next(res);
     });
   }

@@ -20,7 +20,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     HttpClientModule
   ],
   providers: [
-    Game
+    //Game
   ],
   bootstrap: [AppComponent]
 })

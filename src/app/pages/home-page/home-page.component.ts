@@ -17,4 +17,8 @@ export class HomePageComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // public createGame() {
+  //   this.navigationService.goToBoard();
+  // }
+
 }
