@@ -1,3 +1,4 @@
+import { LobbyPageComponent } from './pages/lobby/lobby-page/lobby-page.component';
 import { BoardPageComponent } from './pages/board-page/board-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { NgModule } from '@angular/core';
@@ -10,8 +11,12 @@ const routes = [
     component: HomePageComponent
   },
   {
-    path: 'board',
+    path: 'game/:gameId',
     component: BoardPageComponent
+  },
+  {
+    path: 'lobby',
+    component: LobbyPageComponent
   },
   {
     path: '',

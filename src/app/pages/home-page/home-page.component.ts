@@ -10,15 +10,11 @@ import { Component, OnInit } from '@angular/core';
 export class HomePageComponent implements OnInit {
 
   constructor(
-    public readonly navigationService: NavigationService,
-    public readonly connectionService: ConnectionService
+    public readonly navigationService: NavigationService
   ) { }
 
   ngOnInit(): void {
   }
 
-  // public createGame() {
-  //   this.navigationService.goToBoard();
-  // }
 
 }

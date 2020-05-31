@@ -1,6 +1,6 @@
 import { InitialMessage } from './../../model/message/initial-message';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -22,15 +22,11 @@ export class ConnectionService {
     });
   }
 
-  public createGame() {
-    this.http.get('http://localhost:9901/api/game/create').subscribe((res: InitialMessage) => {
-      this._connectionSocketInitialMessage.next(res);
-    });
+  public createGame(): Observable<InitialMessage> {
+    return this.http.get('http://localhost:9901/api/game/create') as Observable<InitialMessage>;
   }
 
-  public joinGame() {
-    this.http.get('http://localhost:9901/api/game/join').subscribe((res: InitialMessage) => {
-      this._connectionSocketInitialMessage.next(res);
-    });
+  public joinGame(gameId: string): Observable<InitialMessage> {
+    return this.http.get(`http://localhost:9901/api/game/join/${gameId}`) as Observable<InitialMessage>;
   }
 }

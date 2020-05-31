@@ -45,7 +45,7 @@ export class Board {
         this.canvas.addEventListener('click', e => this.onClick(e), false);
     }
 
-    private onClick(e) {
+    private onClick(e: MouseEvent) {
         const boardPosition = BoardPosition.getBoardPositionfromAbsolutePosition(
             new AbsolutePosition(e.offsetX, e.offsetY)
         );

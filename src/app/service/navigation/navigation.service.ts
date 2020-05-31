@@ -10,20 +10,12 @@ export class NavigationService {
     private readonly router: Router
   ) { }
 
-  public goToBoard(args) {
-    this.router.navigate(['/board'], {queryParams: args});
+  public goToGame(gameId: string) {
+    this.router.navigate([`/game/${gameId}`]);
   }
 
-  public joinGame() {
-    this.goToBoard({
-      create: 'join'
-    });
-  }
-
-  public createGame() {
-    this.goToBoard({
-      create: 'create'
-    });
+  public goToLobby() {
+    this.router.navigate(['/lobby']);
   }
 
   public goToHome() {
