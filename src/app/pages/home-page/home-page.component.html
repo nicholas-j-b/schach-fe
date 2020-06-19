@@ -1,5 +1,17 @@
 <div>
-    <p>this is the home page</p>
-    <button (click)="this.navigationService.goToLobby()">go to lobby</button>
+    <h1>fuckin' chess ay</h1>
+    <ul class="buttons">
+        <li>
+            <button (click)="this.navigationService.goToLobby()">go to lobby</button>
+        </li>
+        <li (click)="onClickDont()"
+        [ngClass]="dont ? 'show' : 'hide'">
+            <button> don't go to lobby</button>
+        </li>
+        <li (click)="onClickDont()"
+        [ngClass]="dont ? 'hide' : 'show'">
+            <button>oi but give it a go mate</button>
+        </li>
+    </ul>
 
 </div>

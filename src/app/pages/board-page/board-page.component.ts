@@ -1,3 +1,4 @@
+import { NavigationService } from './../../service/navigation/navigation.service';
 import { GameStoreService } from './../../store/game-store.service';
 import { Game } from './../../model/game/game';
 import { InitialMessage } from './../../model/message/initial-message';
@@ -16,7 +17,8 @@ export class BoardPageComponent implements OnInit {
 
   constructor(
     private readonly gameStore: GameStoreService,
-    private readonly route: ActivatedRoute
+    private readonly route: ActivatedRoute,
+    public readonly navigationService: NavigationService
   ) {
   }
 

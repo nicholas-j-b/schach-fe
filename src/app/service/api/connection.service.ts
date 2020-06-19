@@ -15,7 +15,7 @@ export class ConnectionService {
   constructor(
     private readonly http: HttpClient
   ) {
-    this._connectionSocketInitialMessage.subscribe((val) => {
+    this.$connectionSocketInitialMessage.subscribe((val) => {
       if (val) {
         console.log(val);
       }

@@ -8,12 +8,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit {
+  public dont = true;
 
   constructor(
     public readonly navigationService: NavigationService
   ) { }
 
   ngOnInit(): void {
+  }
+
+  onClickDont(): void {
+    this.dont = !this.dont;
   }
 
 

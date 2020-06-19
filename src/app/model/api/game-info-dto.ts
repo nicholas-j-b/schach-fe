@@ -1,4 +1,4 @@
 export class GameInfoDto {
     gameId: string;
-    playerIds: string[];
+    connectionIds: string[];
 }
