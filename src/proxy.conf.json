@@ -1,6 +1,6 @@
 {
     "/api/*": {
-        "target": "http://localhost:9901",
+        "target": "http://dummyvariables.net:9901",
         "secure": false,
         "logLevel": "debug"
     }

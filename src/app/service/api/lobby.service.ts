@@ -1,3 +1,4 @@
+import { environment } from './../../../environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
 import { GameInfoDto } from './../../model/api/game-info-dto';
 import { Injectable } from '@angular/core';
@@ -16,7 +17,7 @@ export class LobbyService {
   ) { }
 
   public getActiveGames() {
-    this.http.get('http://localhost:9901/api/lobby/games').subscribe((gameInfoDtos: GameInfoDto[]) => {
+    this.http.get(environment.baseUrl + 'lobby/games').subscribe((gameInfoDtos: GameInfoDto[]) => {
       this._activeGames.next(gameInfoDtos);
     });
   }

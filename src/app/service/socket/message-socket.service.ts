@@ -1,3 +1,4 @@
+import { environment } from './../../../environments/environment';
 import { MoveCollection } from './../../model/game/move-collection';
 import { LegalMoveMessage } from './../../model/message/legal-move-message';
 import { Move } from './../../model/game/move';
@@ -32,7 +33,7 @@ export class MessageSocketService {
   private setVals(vals: InitialMessage) {
     this.connectionId = vals.connectionId;
     this.colour = Colour[vals.colour];
-    const socket = new WebSocket('ws://localhost:9901/api/movement');
+    const socket = new WebSocket(environment.wsBaseUrl + 'movement');
     this.ws = Stomp.over(socket);
   }
 

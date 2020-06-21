@@ -1,3 +1,4 @@
+import { environment } from './../../../environments/environment.prod';
 import { InitialMessage } from './../../model/message/initial-message';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -23,10 +24,10 @@ export class ConnectionService {
   }
 
   public createGame(): Observable<InitialMessage> {
-    return this.http.get('http://localhost:9901/api/game/create') as Observable<InitialMessage>;
+    return this.http.get(environment.baseUrl + 'game/create') as Observable<InitialMessage>;
   }
 
   public joinGame(gameId: string): Observable<InitialMessage> {
-    return this.http.get(`http://localhost:9901/api/game/join/${gameId}`) as Observable<InitialMessage>;
+    return this.http.get(environment.baseUrl + `game/join/${gameId}`) as Observable<InitialMessage>;
   }
 }
