@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --port 9801",
+    "start": "ng serve --port 9801 -c dev",
+    "start:prod": "ng serve --port 9801 -c production",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

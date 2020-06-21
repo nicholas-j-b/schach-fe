@@ -1,4 +1,4 @@
-import { environment } from './../../../environments/environment.prod';
+import { environment } from './../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { GameInfoDto } from './../../model/api/game-info-dto';
 import { Injectable } from '@angular/core';
