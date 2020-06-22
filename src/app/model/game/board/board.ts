@@ -60,7 +60,7 @@ export class Board {
             return boardPosition.equals(move.from);
         });
         that.highlight([moves.from], HighlightType.SELECTED_FOR_MOVING, that);
-        that.highlight(moves.to, HighlightType.POSSIBLE_MOVE_SQUARE, that);
+        that.highlight(moves.to.map(it => it.to), HighlightType.POSSIBLE_MOVE_SQUARE, that);
     }
 
     private highlight(boardPositions: BoardPosition[], highlightType: HighlightType, that: this) {
@@ -88,39 +88,6 @@ export class Board {
             }
         }
     }
-
-    // updateHighlightedSquares(pos) {
-    //     this.boardSquares[pos.y][pos.x].setHighlighted();
-    // }
-
-    // checkMoveLegalFrom(pos, colour) {
-    //     if (this.squares[pos.x][pos.y]?.colour === colour) {
-    //         this.updateHighlightedSquares(pos);
-    //         return true;
-    //     };
-    // }
-
-    // move(move) {
-    //     if (this.checkMoveLegality(move)) {
-    //         const piece = this.squares[move.from.x][move.from.y];
-    //         this.squares[move.from.x][move.from.y] = null;
-    //         piece.move(move.to);
-    //         this.squares[move.to.x][move.to.y] = piece;
-    //         this.setAllSquaresUnhighlighted();
-    //     }
-    // }
-
-    // setAllSquaresUnhighlighted() {
-    //     for (let row of this.boardSquares) {
-    //         for (let square of row) {
-    //             square.setUnhighlighted();
-    //         }
-    //     }
-    // }
-
-    // update() {
-
-    // }
 
     public draw() {
         this.clearBoard();

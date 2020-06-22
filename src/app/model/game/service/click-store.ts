@@ -1,7 +1,6 @@
 import { MoveCollection } from './../move-collection';
 import { FunReturn } from './../../fun-return.enum';
 import { ClickState } from './../click-state';
-import { Move } from './../move';
 import { BoardPosition } from '../position/board-position';
 
 export class ClickStore {
@@ -12,7 +11,7 @@ export class ClickStore {
     public onClick(boardPosition: BoardPosition): FunReturn {
         switch (this.clickState) {
             case ClickState.DEFAULT: {
-                if (this.legalPieceSelection(boardPosition)) {
+                if (this.isLegalPieceSelection(boardPosition)) {
                     this.selectedPiece = boardPosition;
                     this.clickState = ClickState.SELECTED_TO_MOVE;
                     return FunReturn.SELECT_PIECE_FOR_MOVING;
@@ -20,7 +19,7 @@ export class ClickStore {
                 return FunReturn.DO_NOTHING;
             }
             case ClickState.SELECTED_TO_MOVE: {
-                if (this.legalPieceMove(boardPosition)) {
+                if (this.isLegalPieceMoveDestination(boardPosition)) {
                     this.clickState = ClickState.DEFAULT;
                     return FunReturn.MOVE;
                 }
@@ -33,16 +32,16 @@ export class ClickStore {
         }
     }
 
-    private legalPieceSelection(boardPosition: BoardPosition) {
+    private isLegalPieceSelection(boardPosition: BoardPosition): boolean {
         return this.legalMoves.some((move) => {
             return boardPosition.equals(move.from);
         });
     }
 
-    private legalPieceMove(boardPosition: BoardPosition) {
+    private isLegalPieceMoveDestination(boardPosition: BoardPosition): boolean {
         return this.legalMoves.some((move) => {
-            return this.selectedPiece.equals(move.from) && move.to.some((pos) => {
-                return boardPosition.equals(pos);
+            return this.selectedPiece.equals(move.from) && move.to.some((destination) => {
+                return boardPosition.equals(destination.to);
             });
         });
     }
