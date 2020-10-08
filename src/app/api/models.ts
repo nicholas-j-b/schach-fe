@@ -1,3 +1,7 @@
+export { Message } from './models/message';
+export { NewUserDto } from './models/new-user-dto';
+export { UserDto } from './models/user-dto';
+export { UserRole } from './models/user-role';
 export { BoardId } from './models/board-id';
 export { BoardStateDto } from './models/board-state-dto';
 export { ColourStatusDto } from './models/colour-status-dto';

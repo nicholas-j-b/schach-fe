@@ -1,0 +1,23 @@
+<form [formGroup]="userForm" (ngSubmit)=onSubmit()>
+    <div>
+        <label>
+            Username:
+            <input type="text" formControlName="username">
+        </label>
+    </div>
+
+    <div>
+
+        <label>
+            Password:
+            <input type="password" formControlName="password">
+        </label>
+    </div>
+    <div>
+
+        <button type="submit" [disabled]="!isLoginFormValid()">login</button>
+    </div>
+    <div *ngIf="shouldDisplayUsernameRequirements()">
+        <p>just aphanumeric and underscores in the username! minimum length 3</p>
+    </div>
+</form>

@@ -1,3 +1,6 @@
+import { HealthService } from './../../api/services/health.service';
+import { AuthenticationService } from './../../services/authentication/authentication.service';
+import { UserService } from './../../api/services/user.service';
 import { BoardService } from './../../api/services/board.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,14 +12,12 @@ import { Component, OnInit } from '@angular/core';
 export class HomePageComponent implements OnInit {
 
   constructor(
-    private readonly boardService: BoardService
+    private readonly authenticationService: AuthenticationService,
+    private readonly healthService: HealthService
   ) { }
 
   ngOnInit(): void {
-    const response = this.boardService.getAllBoardIds();
-    response.subscribe(msg => {
-      console.log(msg);
-    });
+    this.authenticationService.login('user1', 'user1');
   }
 
 }

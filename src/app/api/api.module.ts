@@ -6,6 +6,8 @@ import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 import { BoardService } from './services/board.service';
 import { MoveService } from './services/move.service';
 import { EvaluationService } from './services/evaluation.service';
+import { HealthService } from './services/health.service';
+import { UserService } from './services/user.service';
 
 /**
  * Module that provides all services and configuration.
@@ -18,6 +20,8 @@ import { EvaluationService } from './services/evaluation.service';
     BoardService,
     MoveService,
     EvaluationService,
+    HealthService,
+    UserService,
     ApiConfiguration
   ],
 })
