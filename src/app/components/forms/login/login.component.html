@@ -21,3 +21,6 @@
         <p>just aphanumeric and underscores in the username! minimum length 3</p>
     </div>
 </form>
+<div *ngIf="loginLoading">
+    <app-spinner></app-spinner>
+</div>

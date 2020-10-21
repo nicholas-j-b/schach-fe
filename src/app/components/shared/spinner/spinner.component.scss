@@ -1,0 +1,51 @@
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+    opacity: 0.5;
+    z-index: 100;
+}
+
+.spinner-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    place-items: center;
+    z-index: 101;
+    .spinner-box {
+        position: relative;
+        height: 20vw;
+        width: 20vw;
+        .spinner {
+            border: 2px solid blue;
+            border-radius: 43%;
+            width: 100%;
+            height: 100%;
+            animation: spin 1.8s linear infinite;
+            z-index: 101;
+            opacity: 1;
+        }
+        .text {
+            margin: auto 0;
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            text-align: center;
+        }
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

@@ -10,6 +10,7 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { LoginComponent } from './components/forms/login/login.component';
 import { CreateAccountComponent } from './components/forms/create-account/create-account.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SpinnerComponent } from './components/shared/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     HomePageComponent,
     LoginPageComponent,
     LoginComponent,
-    CreateAccountComponent
+    CreateAccountComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,

@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   validUsername = /^[A-Za-z0-9_]+$/;
   usernameMinLength = 3;
   returnUrl: string;
+  loginLoading = false;
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -55,7 +56,9 @@ export class LoginComponent implements OnInit {
       const password = this.userForm.get('password').value;
       console.log(username);
       const loginResponse = this.authenticationService.login(username, password);
+      this.loginLoading = true;
       loginResponse.subscribe(res => {
+        this.loginLoading = false;
         this.router.navigate([this.returnUrl]);
       });
     }
