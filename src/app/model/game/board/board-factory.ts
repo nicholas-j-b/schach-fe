@@ -1,3 +1,4 @@
+import { MovementService } from './../service/movement-service';
 import { BoardColour } from './../../../view/board/board-colour.enum';
 import { MessageSocketService } from './../../../service/socket/message-socket.service';
 import { Square } from './square';
@@ -8,8 +9,13 @@ import { Piece } from '../piece';
 import { ClickStore } from '../service/click-store';
 export class BoardFactory {
 
-    public static wire(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D, messageService: MessageSocketService) {
-        const board = new Board(canvas, ctx, messageService); 
+    public static wire(
+        canvas: HTMLCanvasElement,
+        ctx: CanvasRenderingContext2D,
+        messageService: MessageSocketService,
+        movementService: MovementService
+        ) {
+        const board = new Board(canvas, ctx, messageService, movementService);
         board.boardSquares = BoardFactory.initialiseSquares(canvas, ctx);
         return board;
     }

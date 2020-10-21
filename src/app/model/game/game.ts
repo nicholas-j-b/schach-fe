@@ -1,3 +1,4 @@
+import { MovementService } from './service/movement-service';
 import { GameTimer } from './game-timer';
 import { Piece } from './piece';
 import { BoardFactory } from './board/board-factory';
@@ -18,6 +19,7 @@ export class Game {
 
     constructor(
         private readonly messageService: MessageSocketService,
+        private readonly movementService: MovementService,
         public readonly gameId: string,
     ) {
     }
@@ -26,7 +28,11 @@ export class Game {
         this.canvas = document.getElementById("schachCanvas") as HTMLCanvasElement;
         this.ctx = this.canvas.getContext("2d") as CanvasRenderingContext2D;
         this.timer = new GameTimer();
-        this.board = BoardFactory.wire(this.canvas, this.ctx, this.messageService);
+        this.board = BoardFactory.wire(
+            this.canvas,
+            this.ctx,
+            this.messageService, 
+            this.movementService);
         this.board.draw();
         this.timer.start(this.board, this.update);
     }

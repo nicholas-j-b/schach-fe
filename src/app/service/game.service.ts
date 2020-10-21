@@ -33,7 +33,7 @@ export class GameService {
   }
 
   private initialiseGame(initialMessage: InitialMessage) {
-    const game = new Game(this.messageService, initialMessage.gameId);
+    const game = new Game(this.messageService, this.movementService, initialMessage.gameId);
     this.gameStore.addGame(game);
     this._gameId.next(game.gameId);
     this.messageService.initialise(initialMessage);

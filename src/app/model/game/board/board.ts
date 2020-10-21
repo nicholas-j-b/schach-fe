@@ -1,3 +1,4 @@
+import { MovementService } from './../service/movement-service';
 import { Square } from './square';
 import { HighlightType } from './../../../view/board/highlight-type.enum';
 import { MoveCollection } from './../move-collection';
@@ -27,7 +28,8 @@ export class Board {
     constructor(
         private readonly canvas: HTMLCanvasElement,
         private ctx: CanvasRenderingContext2D,
-        private readonly messageService: MessageSocketService
+        private readonly messageService: MessageSocketService,
+        private readonly movementService: MovementService
     ) {
         this.initialiseUpdates();
     }
@@ -69,10 +71,11 @@ export class Board {
         });
     }
 
-    private move(boardPosition: BoardPosition, that: this) {
+    private move(to: BoardPosition, that: this) {
         console.log('move');
         const from = that.clickStore.getSelectedPiece();
-        that.messageService.sendMove(new Move(from, boardPosition));
+        const move = this.movementService.getMove(from, to, that.legalMoves);
+        that.messageService.sendMove(move);
         that.unhighlightAll(that);
     }
 
