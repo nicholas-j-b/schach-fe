@@ -54,7 +54,10 @@ export class LoginComponent implements OnInit {
       const username = this.userForm.get('username').value;
       const password = this.userForm.get('password').value;
       console.log(username);
-      this.authenticationService.login(username, password);
+      const loginResponse = this.authenticationService.login(username, password);
+      loginResponse.subscribe(res => {
+        this.router.navigate([this.returnUrl]);
+      });
     }
 
 

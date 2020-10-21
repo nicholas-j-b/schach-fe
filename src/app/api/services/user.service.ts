@@ -8,6 +8,7 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
+import { MessageDto } from '../models/message-dto';
 import { NewUserDto } from '../models/new-user-dto';
 import { UserDto } from '../models/user-dto';
 import { UserRole } from '../models/user-role';
@@ -48,7 +49,7 @@ export class UserService extends BaseService {
      * new user information
      */
     body?: NewUserDto
-  }): Observable<StrictHttpResponse<string>> {
+  }): Observable<StrictHttpResponse<MessageDto>> {
 
     const rb = new RequestBuilder(this.rootUrl, UserService.RegisterNewUserPath, 'post');
     if (params) {
@@ -62,7 +63,7 @@ export class UserService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<string>;
+        return r as StrictHttpResponse<MessageDto>;
       })
     );
   }
@@ -83,10 +84,10 @@ export class UserService extends BaseService {
      * new user information
      */
     body?: NewUserDto
-  }): Observable<string> {
+  }): Observable<MessageDto> {
 
     return this.registerNewUser$Response(params).pipe(
-      map((r: StrictHttpResponse<string>) => r.body as string)
+      map((r: StrictHttpResponse<MessageDto>) => r.body as MessageDto)
     );
   }
 

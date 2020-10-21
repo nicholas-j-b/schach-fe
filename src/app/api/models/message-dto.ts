@@ -1,4 +1,4 @@
 /* tslint:disable */
-export interface Message {
+export interface MessageDto {
   message?: string;
 }

@@ -8,7 +8,7 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
-import { Message } from '../models/message';
+import { MessageDto } from '../models/message-dto';
 
 
 /**
@@ -42,7 +42,7 @@ export class HealthService extends BaseService {
    */
   amIAlive$Response(params?: {
 
-  }): Observable<StrictHttpResponse<Message>> {
+  }): Observable<StrictHttpResponse<MessageDto>> {
 
     const rb = new RequestBuilder(this.rootUrl, HealthService.AmIAlivePath, 'get');
     if (params) {
@@ -55,7 +55,7 @@ export class HealthService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Message>;
+        return r as StrictHttpResponse<MessageDto>;
       })
     );
   }
@@ -72,10 +72,10 @@ export class HealthService extends BaseService {
    */
   amIAlive(params?: {
 
-  }): Observable<Message> {
+  }): Observable<MessageDto> {
 
     return this.amIAlive$Response(params).pipe(
-      map((r: StrictHttpResponse<Message>) => r.body as Message)
+      map((r: StrictHttpResponse<MessageDto>) => r.body as MessageDto)
     );
   }
 

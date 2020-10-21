@@ -1,4 +1,4 @@
-export { Message } from './models/message';
+export { MessageDto } from './models/message-dto';
 export { NewUserDto } from './models/new-user-dto';
 export { UserDto } from './models/user-dto';
 export { UserRole } from './models/user-role';

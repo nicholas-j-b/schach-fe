@@ -4,6 +4,7 @@ import { UserService } from './../../api/services/user.service';
 import { User } from './../../models/user';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, of, Observable } from 'rxjs';
+import { StrictHttpResponse } from 'src/app/api/strict-http-response';
 
 @Injectable({
   providedIn: 'root'
@@ -20,38 +21,32 @@ export class AuthenticationService {
     private readonly healthService: HealthService,
     private readonly http: HttpClient
   ) {
-    // this._userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')))
-    // this.$user = this._userSubject.asObservable();
-    // this.$user.subscribe(user => {
-    // this.user = user;
-    // });
+    this.user = JSON.parse(localStorage.getItem('user')) as User;
   }
 
-  // public get user(): User {
-  //   return this.user;
-  // }
+  public isUserLoggedIn(): boolean {
+    return this.user?.authenticated;
+  }
 
-  // public set user(user: User) {
-  //   this._user = user;
-  // }
-
-  public login(username: string, password: string) {
+  public login(username: string, password: string): Observable<StrictHttpResponse<boolean>> {
     this.user = new User(
       username, password, window.btoa(`${username}:${password}`)
     );
-    return this.userService.getUserExists$Response({ username }).subscribe(res => {
+    const res = this.userService.getUserExists$Response({ username })
+    res.subscribe(res => {
       console.log('login in auth service');
       if (res.body) {
+        this.user.authenticated = true;
         localStorage.setItem('user', JSON.stringify(this.user));
       } else {
         this.user = null;
         localStorage.removeItem('user');
       }
     }, error => {
-        this.user = null;
-        localStorage.removeItem('user');
-    }
-    );
+      this.user = null;
+      localStorage.removeItem('user');
+    });
+    return res;
   }
 
 }
