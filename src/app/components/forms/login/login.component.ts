@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   usernameMinLength = 3;
   returnUrl: string;
   loginLoading = false;
+  loginFailed = false;
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -40,7 +41,7 @@ export class LoginComponent implements OnInit {
 
   }
 
-  onSubmit() {
+  public onSubmit() {
     if (this.userForm.invalid) {
       return;
     } else {
@@ -50,23 +51,33 @@ export class LoginComponent implements OnInit {
       this.loginLoading = true;
       loginResponse.subscribe(res => {
         this.loginLoading = false;
+        this.loginFailed = false;
         this.router.navigate([this.returnUrl]);
-      });
+      },
+      err => {
+        console.log(err);
+        this.loginLoading = false;
+        this.loginFailed = true;
+      }
+      );
     }
-
-
   }
 
-  isLoginFormValid(): boolean {
+  public isLoginFormValid(): boolean {
     return this.userForm.valid;
   }
 
-  isValidUsername(username: string): boolean {
+  public isValidUsername(username: string): boolean {
     return !!username.match(this.validUsername);
   }
 
-  shouldDisplayUsernameRequirements(): boolean {
+  public shouldDisplayUsernameRequirements(): boolean {
     return !this.userForm.valid && this.userForm.get('username').value.length >= this.usernameMinLength;
   }
+
+  public loginIncorrect(): boolean {
+    return this.loginFailed;
+  }
+
 
 }

@@ -20,6 +20,9 @@
     <div *ngIf="shouldDisplayUsernameRequirements()">
         <p>just aphanumeric and underscores in the username! minimum length 3</p>
     </div>
+    <div *ngIf="loginIncorrect()">
+        <p>login failed</p>
+    </div>
 </form>
 <div *ngIf="loginLoading">
     <app-spinner></app-spinner>
