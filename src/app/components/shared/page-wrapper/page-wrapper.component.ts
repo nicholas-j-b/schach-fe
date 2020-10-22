@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./page-wrapper.component.scss']
 })
 export class PageWrapperComponent implements OnInit {
+  sidebarOpen = true;
 
   constructor() { }
 

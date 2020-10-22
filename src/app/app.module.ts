@@ -18,6 +18,7 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
 import { LobbyPageComponent } from './pages/lobby-page/lobby-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { RegisterComponent } from './components/forms/register/register.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -39,11 +40,12 @@ import { RegisterComponent } from './components/forms/register/register.componen
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useExisting: forwardRef(() => BasicAuthInterceptor), multi: true}
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

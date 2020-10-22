@@ -2,11 +2,14 @@
     height: 100vh;
     width: 100vw;
     display: grid;
-    grid-template-columns: minMax(150px, 25%) 1fr;
+    grid-template-columns: 35px 1fr;
     grid-template-rows: 1fr;
     grid-template-areas: 
         "sidebar content"
     ;
+    &.sidebarOpen {
+        grid-template-columns: 90px 1fr;
+    }
     .sidebar {
         grid-column: 1;
     }

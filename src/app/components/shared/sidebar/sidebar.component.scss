@@ -1,0 +1,15 @@
+.navItem-wrapper {
+    background-color: beige;
+    border-bottom: solid 1px black;
+    display: grid;
+    place-items: center;
+}
+
+.navItem-wrapper:hover {
+    background-color: bisque;
+}
+
+.navItem {
+    margin: 4px auto;
+    user-select: none;
+}

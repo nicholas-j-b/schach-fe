@@ -1,3 +1,17 @@
+<div class="navItem-wrapper" (click)="toggleSidebar()">
+    <div class="navItem">
+        <fa-icon [icon]="faBars"></fa-icon>
+    </div>
+</div>
 <div *ngFor="let navItem of navItems">
-    <div class="navItem" [innerHtml]="navItem.text" (click)="navigate(navItem.page)"></div>
+    <div class="navItem-wrapper" (click)="navigate(navItem.page)">
+        <div *ngIf="sidebarOpen; else useIcons">
+            <div class="navItem" [innerHtml]="navItem.text"></div>
+        </div>
+        <ng-template #useIcons>
+            <div class="navItem">
+                <fa-icon [icon]="navItem.icon"></fa-icon>
+            </div>
+        </ng-template>
+    </div>
 </div>

@@ -1,6 +1,6 @@
-<div class="page">
+<div class="page" [ngClass]="{'sidebarOpen': sidebarOpen }">
     <div class="sidebar">
-        <app-sidebar></app-sidebar>
+        <app-sidebar [sidebarOpen]="sidebarOpen" (sidebarToggle)="sidebarOpen=$event"></app-sidebar>
     </div>
     <div class="page-content">
         <ng-content></ng-content>
