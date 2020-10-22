@@ -19,6 +19,7 @@ import { LobbyPageComponent } from './pages/lobby-page/lobby-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { RegisterComponent } from './components/forms/register/register.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CardComponent } from './components/shared/card/card.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     LobbyPageComponent,
     RegisterPageComponent,
     RegisterComponent,
+    CardComponent,
   ],
   imports: [
     BrowserModule,

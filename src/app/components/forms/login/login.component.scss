@@ -1,0 +1,37 @@
+.login-form {
+    width: 100%;
+    height: 100%;
+}
+
+.form-item {
+    margin: 7px auto;
+}
+
+label {
+    width: 100%;
+}
+
+input {
+    width: 100%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+.buttons {
+    margin-top: 15px;
+    .button-row {
+        overflow: auto;
+        * {
+            display: inline-block;
+        }
+        .register {
+            float: left;
+        }
+        .login {
+            float: right;
+        }
+        *:hover {
+            cursor: pointer;
+        }
+    }
+}

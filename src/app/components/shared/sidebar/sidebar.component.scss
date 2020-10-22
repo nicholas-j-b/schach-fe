@@ -1,12 +1,14 @@
+@import 'src/styles/colours.scss';
+
 .navItem-wrapper {
-    background-color: beige;
-    border-bottom: solid 1px black;
+    background-color: $primary-info-background;
+    border-bottom: solid 1px $primary-accent;
     display: grid;
     place-items: center;
 }
 
 .navItem-wrapper:hover {
-    background-color: bisque;
+    background-color: $secondary-info-background;
 }
 
 .navItem {

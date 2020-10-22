@@ -1,24 +1,26 @@
 <form [formGroup]="userForm" (ngSubmit)=onSubmit()>
-    <div>
+    <div class="form-item">
         <label>
             Username:
             <input placeholder="at least 3 characters" type="text" formControlName="username">
         </label>
     </div>
-    <div>
+    <div class="form-item">
         <label>
             Password:
             <input placeholder="at least 8 characters" type="password" formControlName="password">
         </label>
     </div>
-    <div>
+    <div class="form-item">
         <label>
             Password again:
             <input type="password" formControlName="passwordRepeat">
         </label>
     </div>
-    <div>
-        <button type="submit" [disabled]="!isRegistrationFormValid()">register</button>
+    <div class="buttons">
+        <div class="button-row">
+            <button type="submit" [disabled]="!isRegistrationFormValid()">register</button>
+        </div>
     </div>
     <div *ngIf="shouldDisplayUsernameRequirements()">
         <p>just aphanumeric and underscores in the username! minimum length 3</p>
