@@ -4,6 +4,7 @@ import { UserService } from './../../api/services/user.service';
 import { User } from './../../models/user';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, of, Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,7 @@ export class AuthenticationService {
 
   constructor(
     private readonly userService: UserService,
-    private readonly healthService: HealthService,
-    private readonly http: HttpClient
+    private readonly router: Router
   ) {
     this.user = JSON.parse(localStorage.getItem('user')) as User;
   }
@@ -32,8 +32,7 @@ export class AuthenticationService {
         this.user.authenticated = true;
         localStorage.setItem('user', JSON.stringify(this.user));
       } else {
-        this.user = null;
-        localStorage.removeItem('user');
+        this.logout();
       }
     }, error => {
       this.user = null;
@@ -47,6 +46,12 @@ export class AuthenticationService {
       username, password, window.btoa(`${username}:${password}`)
     );
     return this.authenticateCurrentUser();
+  }
+
+  public logout() {
+    this.user = null;
+    localStorage.removeItem('user');
+    this.router.navigate(['/home']);
   }
 
 }
