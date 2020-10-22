@@ -16,6 +16,8 @@ import { SidebarComponent } from './components/shared/sidebar/sidebar.component'
 import { PlayPageComponent } from './pages/play-page/play-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { LobbyPageComponent } from './pages/lobby-page/lobby-page.component';
+import { RegisterPageComponent } from './pages/register-page/register-page.component';
+import { RegisterComponent } from './components/forms/register/register.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { LobbyPageComponent } from './pages/lobby-page/lobby-page.component';
     PlayPageComponent,
     ProfilePageComponent,
     LobbyPageComponent,
+    RegisterPageComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

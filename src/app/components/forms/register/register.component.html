@@ -1,0 +1,35 @@
+<form [formGroup]="userForm" (ngSubmit)=onSubmit()>
+    <div>
+        <label>
+            Username:
+            <input placeholder="at least 3 characters" type="text" formControlName="username">
+        </label>
+    </div>
+    <div>
+        <label>
+            Password:
+            <input placeholder="at least 8 characters" type="password" formControlName="password">
+        </label>
+    </div>
+    <div>
+        <label>
+            Password again:
+            <input type="password" formControlName="passwordRepeat">
+        </label>
+    </div>
+    <div>
+        <button type="submit" [disabled]="!isRegistrationFormValid()">register</button>
+    </div>
+    <div *ngIf="shouldDisplayUsernameRequirements()">
+        <p>just aphanumeric and underscores in the username! minimum length 3</p>
+    </div>
+    <div *ngIf="shouldDisplayPasswordsMatchWarning()">
+        <p>passwords must match</p>
+    </div>
+    <div *ngIf="shouldDisplayRegisterFailWarning()">
+        <p>registration failed</p>
+    </div>
+</form>
+<div *ngIf="loading">
+    <app-spinner></app-spinner>
+</div>

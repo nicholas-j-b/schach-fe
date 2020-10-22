@@ -1,3 +1,4 @@
+import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { PlayPageComponent } from './pages/play-page/play-page.component';
 import { LobbyPageComponent } from './pages/lobby-page/lobby-page.component';
@@ -11,8 +12,7 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {
     path: 'home',
-    component: HomePageComponent,
-    canActivate: [AuthGuard]
+    component: HomePageComponent
   },
   {
     path: 'lobby',
@@ -32,6 +32,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginPageComponent
+  },
+  {
+    path: 'register',
+    component: RegisterPageComponent
   },
   {
     path: '',

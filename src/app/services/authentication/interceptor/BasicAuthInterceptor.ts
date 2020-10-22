@@ -21,7 +21,6 @@ export class BasicAuthInterceptor implements HttpInterceptor {
             const user = this.authenticationService.user;
             req = req.clone({
                 setHeaders: {
-                    // 'Authorization': 'Basic dXNlcjE6dXNlcjE=',
                     'Authorization': `Basic ${user.authData}`,
                     'Access-Control-Allow-Origin': '*',
                     'Access-Control-Allow-Methods': 'DELETE, POST, GET, OPTIONS',

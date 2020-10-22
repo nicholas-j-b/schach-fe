@@ -1,3 +1,4 @@
+import { UserConfig } from './../../../config/user-config';
 import { AuthenticationService } from './../../../services/authentication/authentication.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -10,10 +11,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   userForm: FormGroup;
-  validUsername = /^[A-Za-z0-9_]+$/;
-  usernameMinLength = 3;
   returnUrl: string;
-  loginLoading = false;
+  loading = false;
   loginFailed = false;
 
   constructor(
@@ -33,12 +32,11 @@ export class LoginComponent implements OnInit {
     return this.formBuilder.group({
       username: ['', [
         Validators.required,
-        Validators.pattern(this.validUsername),
-        Validators.minLength(3)
+        Validators.pattern(UserConfig.validUsername),
+        Validators.minLength(UserConfig.usernameMinLength)
       ]],
       password: ['']
     });
-
   }
 
   public onSubmit() {
@@ -48,15 +46,15 @@ export class LoginComponent implements OnInit {
       const username = this.userForm.get('username').value;
       const password = this.userForm.get('password').value;
       const loginResponse = this.authenticationService.login(username, password);
-      this.loginLoading = true;
+      this.loading = true;
       loginResponse.subscribe(res => {
-        this.loginLoading = false;
+        this.loading = false;
         this.loginFailed = false;
         this.router.navigate([this.returnUrl]);
       },
       err => {
         console.log(err);
-        this.loginLoading = false;
+        this.loading = false;
         this.loginFailed = true;
       }
       );
@@ -68,16 +66,19 @@ export class LoginComponent implements OnInit {
   }
 
   public isValidUsername(username: string): boolean {
-    return !!username.match(this.validUsername);
+    return !!username.match(UserConfig.validUsername);
   }
 
   public shouldDisplayUsernameRequirements(): boolean {
-    return !this.userForm.valid && this.userForm.get('username').value.length >= this.usernameMinLength;
+    return !this.userForm.valid && this.userForm.get('username').value.length >= UserConfig.usernameMinLength;
   }
 
   public loginIncorrect(): boolean {
     return this.loginFailed;
   }
 
+  public register() {
+    this.router.navigate(['/register']);
+  }
 
 }

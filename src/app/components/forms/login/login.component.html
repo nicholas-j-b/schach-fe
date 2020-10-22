@@ -5,17 +5,15 @@
             <input type="text" formControlName="username">
         </label>
     </div>
-
     <div>
-
         <label>
             Password:
             <input type="password" formControlName="password">
         </label>
     </div>
     <div>
-
         <button type="submit" [disabled]="!isLoginFormValid()">login</button>
+        <button type="button" (click)="register()">register</button>
     </div>
     <div *ngIf="shouldDisplayUsernameRequirements()">
         <p>just aphanumeric and underscores in the username! minimum length 3</p>
@@ -24,6 +22,6 @@
         <p>login failed</p>
     </div>
 </form>
-<div *ngIf="loginLoading">
+<div *ngIf="loading">
     <app-spinner></app-spinner>
 </div>

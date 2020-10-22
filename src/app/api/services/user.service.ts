@@ -8,7 +8,6 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
-import { MessageDto } from '../models/message-dto';
 import { NewUserDto } from '../models/new-user-dto';
 import { UserDto } from '../models/user-dto';
 import { UserRole } from '../models/user-role';
@@ -49,7 +48,7 @@ export class UserService extends BaseService {
      * new user information
      */
     body?: NewUserDto
-  }): Observable<StrictHttpResponse<MessageDto>> {
+  }): Observable<StrictHttpResponse<boolean>> {
 
     const rb = new RequestBuilder(this.rootUrl, UserService.RegisterNewUserPath, 'post');
     if (params) {
@@ -63,7 +62,7 @@ export class UserService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<MessageDto>;
+        return (r as HttpResponse<any>).clone({ body: String((r as HttpResponse<any>).body) === 'true' }) as StrictHttpResponse<boolean>;
       })
     );
   }
@@ -84,10 +83,10 @@ export class UserService extends BaseService {
      * new user information
      */
     body?: NewUserDto
-  }): Observable<MessageDto> {
+  }): Observable<boolean> {
 
     return this.registerNewUser$Response(params).pipe(
-      map((r: StrictHttpResponse<MessageDto>) => r.body as MessageDto)
+      map((r: StrictHttpResponse<boolean>) => r.body as boolean)
     );
   }
 
