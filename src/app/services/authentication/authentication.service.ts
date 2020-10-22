@@ -4,17 +4,12 @@ import { UserService } from './../../api/services/user.service';
 import { User } from './../../models/user';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, of, Observable } from 'rxjs';
-import { StrictHttpResponse } from 'src/app/api/strict-http-response';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  // private _userSubject: BehaviorSubject<User>;
-  // private $user: Observable<User>;
-
   public user: User;
-
 
   constructor(
     private readonly userService: UserService,
@@ -28,14 +23,12 @@ export class AuthenticationService {
     return this.user?.authenticated;
   }
 
-  public login(username: string, password: string): Observable<StrictHttpResponse<boolean>> {
-    this.user = new User(
-      username, password, window.btoa(`${username}:${password}`)
-    );
-    const res = this.userService.getUserExists$Response({ username })
-    res.subscribe(res => {
+  public authenticateCurrentUser(): Observable<boolean> {
+    const username = this.user.username;
+    const userExists = this.userService.getUserExists({ username });
+    userExists.subscribe(exists => {
       console.log('login in auth service');
-      if (res.body) {
+      if (exists) {
         this.user.authenticated = true;
         localStorage.setItem('user', JSON.stringify(this.user));
       } else {
@@ -46,7 +39,14 @@ export class AuthenticationService {
       this.user = null;
       localStorage.removeItem('user');
     });
-    return res;
+    return userExists;
+  }
+
+  public login(username: string, password: string): Observable<boolean> {
+    this.user = new User(
+      username, password, window.btoa(`${username}:${password}`)
+    );
+    return this.authenticateCurrentUser();
   }
 
 }

@@ -22,18 +22,10 @@ export class LoginComponent implements OnInit {
     private readonly router: Router
   ) {
     this.userForm = this.buildLoginForm();
-    this.userForm.valueChanges.subscribe(form => {
-      console.log(form);
-    });
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   ngOnInit(): void {
-  }
-
-  submitForm(): void {
-    console.log(this.userForm.get('username'));
-    console.log(this.userForm.get('password'));
   }
 
   private buildLoginForm(): FormGroup {
@@ -54,7 +46,6 @@ export class LoginComponent implements OnInit {
     } else {
       const username = this.userForm.get('username').value;
       const password = this.userForm.get('password').value;
-      console.log(username);
       const loginResponse = this.authenticationService.login(username, password);
       this.loginLoading = true;
       loginResponse.subscribe(res => {

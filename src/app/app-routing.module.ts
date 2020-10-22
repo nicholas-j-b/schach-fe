@@ -1,3 +1,6 @@
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { PlayPageComponent } from './pages/play-page/play-page.component';
+import { LobbyPageComponent } from './pages/lobby-page/lobby-page.component';
 import { AuthGuard } from './services/authentication/guard/AuthGuard';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
@@ -9,6 +12,21 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomePageComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'lobby',
+    component: LobbyPageComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'play',
+    component: PlayPageComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'profile',
+    component: ProfilePageComponent,
     canActivate: [AuthGuard]
   },
   {

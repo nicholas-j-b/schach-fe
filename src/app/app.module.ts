@@ -11,6 +11,11 @@ import { LoginComponent } from './components/forms/login/login.component';
 import { CreateAccountComponent } from './components/forms/create-account/create-account.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SpinnerComponent } from './components/shared/spinner/spinner.component';
+import { PageWrapperComponent } from './components/shared/page-wrapper/page-wrapper.component';
+import { SidebarComponent } from './components/shared/sidebar/sidebar.component';
+import { PlayPageComponent } from './pages/play-page/play-page.component';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { LobbyPageComponent } from './pages/lobby-page/lobby-page.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +24,12 @@ import { SpinnerComponent } from './components/shared/spinner/spinner.component'
     LoginPageComponent,
     LoginComponent,
     CreateAccountComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    PageWrapperComponent,
+    SidebarComponent,
+    PlayPageComponent,
+    ProfilePageComponent,
+    LobbyPageComponent,
   ],
   imports: [
     BrowserModule,

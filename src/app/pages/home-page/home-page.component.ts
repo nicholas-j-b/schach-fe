@@ -10,6 +10,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit {
+  username = this.authenticationService.user.username;
+  welcomeText = `Welcome to Schachfish, ${this.username}`;
 
   constructor(
     private readonly authenticationService: AuthenticationService,
@@ -17,7 +19,6 @@ export class HomePageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.authenticationService.login('user1', 'user1');
   }
 
 }
