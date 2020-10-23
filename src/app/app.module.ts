@@ -20,6 +20,7 @@ import { RegisterComponent } from './components/forms/register/register.componen
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CardComponent } from './components/shared/card/card.component';
 import { BoardComponent } from './components/play/board/board.component';
+import { LobbyInfoComponent } from './components/lobby/lobby-info/lobby-info.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { BoardComponent } from './components/play/board/board.component';
     RegisterComponent,
     CardComponent,
     BoardComponent,
+    LobbyInfoComponent,
   ],
   imports: [
     BrowserModule,
