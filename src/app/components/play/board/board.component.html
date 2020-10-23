@@ -1,0 +1,7 @@
+<div class="board-wrapper">
+    <div class="board">
+        <div *ngFor="let row of squareIndicies; index as i">
+            <div class="square" [ngClass]="{'black': isBlackSquare(i), 'white': !isBlackSquare(i)}"></div>
+        </div>
+    </div>
+</div>

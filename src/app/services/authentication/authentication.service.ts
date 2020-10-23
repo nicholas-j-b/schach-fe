@@ -52,8 +52,7 @@ export class AuthenticationService {
   }
 
   public logout() {
-    this.user = null;
-    localStorage.removeItem('user');
+    this.clearUser();
     this.router.navigate(['/home']);
   }
 
@@ -67,9 +66,14 @@ export class AuthenticationService {
         }
       },
       err => {
-        this.logout();
+        this.clearUser();
       });
     return registerResponse;
+  }
+
+  private clearUser() {
+    this.user = null;
+    localStorage.removeItem('user');
   }
 
 }

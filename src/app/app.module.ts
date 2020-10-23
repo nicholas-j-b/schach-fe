@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { LoginComponent } from './components/forms/login/login.component';
-import { CreateAccountComponent } from './components/forms/create-account/create-account.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SpinnerComponent } from './components/shared/spinner/spinner.component';
 import { PageWrapperComponent } from './components/shared/page-wrapper/page-wrapper.component';
@@ -20,6 +19,7 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
 import { RegisterComponent } from './components/forms/register/register.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CardComponent } from './components/shared/card/card.component';
+import { BoardComponent } from './components/play/board/board.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,6 @@ import { CardComponent } from './components/shared/card/card.component';
     HomePageComponent,
     LoginPageComponent,
     LoginComponent,
-    CreateAccountComponent,
     SpinnerComponent,
     PageWrapperComponent,
     SidebarComponent,
@@ -37,6 +36,7 @@ import { CardComponent } from './components/shared/card/card.component';
     RegisterPageComponent,
     RegisterComponent,
     CardComponent,
+    BoardComponent,
   ],
   imports: [
     BrowserModule,

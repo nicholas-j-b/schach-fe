@@ -1,0 +1,45 @@
+@import 'src/styles/colours.scss';
+
+.board-wrapper {
+    height: 100%;
+    display: grid;
+    place-items: center;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    border: solid .1px $primary-accent;
+}
+
+.square {
+    height: 100%;
+    width: 100%;
+    &.black {
+        background-color: $primary-accent;
+    }
+    &.white {
+        background-color: $primary-info-background;
+    }
+}
+
+@media (min-width: 0px) and (max-width: 700px) {
+    .board{
+        height: 60vw;
+        width: 60vw;
+    }
+}
+
+@media (min-width: 700px) and (max-width: 1000px) {
+    .board{
+        height: 50vw;
+        width: 50vw;
+    }
+}
+
+@media (min-width: 1000px) {
+    .board{
+        height: 40vw;
+        width: 40vw;
+    }
+}
