@@ -1,12 +1,9 @@
 import { NewUserDto } from './../../api/models/new-user-dto';
-import { HttpClient } from '@angular/common/http';
-import { HealthService } from './../../api/services/health.service';
 import { UserService } from './../../api/services/user.service';
 import { User } from './../../models/user';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, of, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -25,31 +22,30 @@ export class AuthenticationService {
     return this.user?.authenticated;
   }
 
-  public authenticateCurrentUser(): Observable<boolean> {
+  public getAuthenticationObs(): Observable<boolean> {
     const username = this.user.username;
-    const userExists = this.userService.getUserExists({ username });
-    userExists.pipe(
-      tap(
-        exists => {
-          console.log('login in auth service');
-          if (exists) {
-            this.user.authenticated = true;
-            localStorage.setItem('user', JSON.stringify(this.user));
-          } else {
-            this.logout();
-          }
-        },
-        error => {
-          this.clearUser();
-        }));
-    return userExists;
+    return this.userService.getUserExists({ username });
+  }
+
+  public authenticateUser(userExists: boolean) {
+    console.log('login in auth service');
+    if (userExists) {
+      this.user.authenticated = true;
+      localStorage.setItem('user', JSON.stringify(this.user));
+    } else {
+      this.logout();
+    }
+  }
+
+  public handleAuthenticateUserFailure(err) {
+    this.clearUser();
   }
 
   public login(username: string, password: string): Observable<boolean> {
     this.user = new User(
       username, password, window.btoa(`${username}:${password}`)
     );
-    return this.authenticateCurrentUser();
+    return this.getAuthenticationObs();
   }
 
   public logout() {
