@@ -6,6 +6,7 @@ import { User } from './../../models/user';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, of, Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -27,20 +28,20 @@ export class AuthenticationService {
   public authenticateCurrentUser(): Observable<boolean> {
     const username = this.user.username;
     const userExists = this.userService.getUserExists({ username });
-    userExists.subscribe(
-      exists => {
-        console.log('login in auth service');
-        if (exists) {
-          this.user.authenticated = true;
-          localStorage.setItem('user', JSON.stringify(this.user));
-        } else {
-          this.logout();
-        }
-      },
-      error => {
-        this.user = null;
-        localStorage.removeItem('user');
-      });
+    userExists.pipe(
+      tap(
+        exists => {
+          console.log('login in auth service');
+          if (exists) {
+            this.user.authenticated = true;
+            localStorage.setItem('user', JSON.stringify(this.user));
+          } else {
+            this.logout();
+          }
+        },
+        error => {
+          this.clearUser();
+        }));
     return userExists;
   }
 
@@ -59,15 +60,6 @@ export class AuthenticationService {
   public register(username: string, password: string): Observable<boolean> {
     const newUserDto = { username, password } as NewUserDto;
     const registerResponse = this.userService.registerNewUser({ body: newUserDto });
-    registerResponse.subscribe(
-      success => {
-        if (success) {
-          this.login(username, password);
-        }
-      },
-      err => {
-        this.clearUser();
-      });
     return registerResponse;
   }
 

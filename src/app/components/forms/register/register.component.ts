@@ -55,17 +55,21 @@ export class RegisterComponent implements OnInit {
       const password = this.userForm.get('password').value;
       const rergisterResponse = this.authenticationService.register(username, password);
       this.loading = true;
-      rergisterResponse.subscribe(res => {
-        this.loading = false;
-        this.registerFailed = false;
-        this.router.navigate(['/home']);
-      },
-      err => {
-        console.log(err);
-        this.loading = false;
-        this.registerFailed = true;
-        this.userForm = this.buildRegisterForm();
-      });
+      rergisterResponse.subscribe(
+        res => {
+          this.loading = false;
+          if (res) {
+            this.registerFailed = false;
+            this.router.navigate(['/home']);
+            this.authenticationService.login(username, password);
+          }
+        },
+        err => {
+          console.log(err);
+          this.loading = false;
+          this.registerFailed = true;
+          this.userForm = this.buildRegisterForm();
+        });
     }
 
   }
