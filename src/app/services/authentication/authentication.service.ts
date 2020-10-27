@@ -4,6 +4,7 @@ import { User } from './../../models/user';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -22,19 +23,21 @@ export class AuthenticationService {
     return this.user?.authenticated;
   }
 
-  public getAuthenticationObs(): Observable<boolean> {
+  public authenticateCurrentUser(): Observable<boolean> {
     const username = this.user.username;
-    return this.userService.getUserExists({ username });
-  }
-
-  public authenticateUser(userExists: boolean) {
-    console.log('login in auth service');
-    if (userExists) {
-      this.user.authenticated = true;
-      localStorage.setItem('user', JSON.stringify(this.user));
-    } else {
-      this.logout();
-    }
+    return this.userService.getUserExists({ username }).pipe(
+      tap(
+        userExists => {
+          if (userExists) {
+            this.user.authenticated = true;
+            localStorage.setItem('user', JSON.stringify(this.user));
+          } else {
+            this.logout();
+          }
+        },
+        err => {}
+      )
+    );
   }
 
   public handleAuthenticateUserFailure(err) {
@@ -45,7 +48,7 @@ export class AuthenticationService {
     this.user = new User(
       username, password, window.btoa(`${username}:${password}`)
     );
-    return this.getAuthenticationObs();
+    return this.authenticateCurrentUser();
   }
 
   public logout() {
@@ -55,8 +58,14 @@ export class AuthenticationService {
 
   public register(username: string, password: string): Observable<boolean> {
     const newUserDto = { username, password } as NewUserDto;
-    const registerResponse = this.userService.registerNewUser({ body: newUserDto });
-    return registerResponse;
+    return this.userService.registerNewUser({ body: newUserDto }).pipe(
+      tap(
+        res => {
+          this.login(username, password);
+        },
+        err => {}
+      )
+    );
   }
 
   private clearUser() {

@@ -61,7 +61,6 @@ export class RegisterComponent implements OnInit {
           if (res) {
             this.registerFailed = false;
             this.router.navigate(['/home']);
-            this.authenticationService.login(username, password);
           }
         },
         err => {
