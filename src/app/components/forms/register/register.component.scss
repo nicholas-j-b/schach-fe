@@ -1,9 +1,12 @@
+@import 'src/styles/variables.scss';
+
 .register-form {
     width: 100%;
     height: 100%;
+    font-size: $standard-font-size;
 }
 
-.register-item {
+.form-item {
     margin: 7px auto;
 }
 
@@ -23,6 +26,7 @@ input {
         overflow: auto;
         * {
             display: inline-block;
+            font-size: $standard-font-size;
         }
         .register {
             float: left;

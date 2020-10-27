@@ -1,4 +1,4 @@
-@import 'src/styles/colours.scss';
+@import "src/styles/colours.scss";
 
 .navItem-wrapper {
     background-color: $primary-info-background;
@@ -14,4 +14,7 @@
 .navItem {
     margin: 4px auto;
     user-select: none;
+    &.sideBarOpen {
+        font-size: 30px;
+    }
 }

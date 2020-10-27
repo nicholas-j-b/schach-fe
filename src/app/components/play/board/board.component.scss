@@ -23,23 +23,23 @@
     }
 }
 
-@media (min-width: 0px) and (max-width: 700px) {
+@media (min-width: 0px) and (max-width: 1000px) {
+    .board{
+        height: 70vw;
+        width: 70vw;
+    }
+}
+
+@media (min-width: 1000px) and (max-width: 1400px) {
     .board{
         height: 60vw;
         width: 60vw;
     }
 }
 
-@media (min-width: 700px) and (max-width: 1000px) {
+@media (min-width: 1400px) {
     .board{
         height: 50vw;
         width: 50vw;
-    }
-}
-
-@media (min-width: 1000px) {
-    .board{
-        height: 40vw;
-        width: 40vw;
     }
 }

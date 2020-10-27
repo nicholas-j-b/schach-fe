@@ -1,10 +1,13 @@
+@import 'src/styles/variables.scss';
+
 .lobby-card {
-    min-width: 250px;
+    min-width: 290px;
     max-width: 50%;
     margin: 10% auto;
     cursor: pointer;
 }
 
-p {
+.header {
     margin: 0;
+    font-size: $title-font-size;
 }

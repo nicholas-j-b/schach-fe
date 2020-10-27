@@ -1,3 +1,4 @@
+import { GameType } from './../../api/models/game-type';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./lobby-page.component.scss']
 })
 export class LobbyPageComponent implements OnInit {
+  standardGame = GameType.Standard;
 
   constructor() { }
 

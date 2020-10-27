@@ -1,9 +1,12 @@
+@import 'src/styles/variables.scss';
+
 .login-card {
     min-width: 250px;
     max-width: 50%;
     margin: 10% auto;
 }
 
-p {
+.header {
     margin: 0;
+    font-size: $title-font-size;
 }
